@@ -25,7 +25,6 @@ echo "生成markdown"
 python -c "from jianshu.book import gen_markdown; gen_markdown()"
 
 echo "生成gitbook"
-#python -c "from jianshu.book import gen_book; gen_book()"
 cd output &&  gitbook mobi
 
 echo "处理文件"

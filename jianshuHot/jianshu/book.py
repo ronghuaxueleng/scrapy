@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-File Name: jianshu/book.py
-Author: JackeyGao
-mail: junqi.gao@shuyun.com
-Created Time: 三  1/ 6 15:37:06 2016
-'''
+
 import sys
 import datetime
 import commands
@@ -38,10 +33,6 @@ def write_summary():
 
     with open('output/SUMMARY.md', 'w') as f:
         f.write(content)
-
-def gen_book():
-    ret, output = commands.getoutput('cd output/; gitbook mobi')
-    return ret
 
 def gen_markdown():
     write_readme()

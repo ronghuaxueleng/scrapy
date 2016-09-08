@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-File Name: jianshu/image.py
-Author: caoqiang
-mail: caoqianghappy@126.com
-'''
+
 import re, sys
 from jianshu.db import Image
 import urllib

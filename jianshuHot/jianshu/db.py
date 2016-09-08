@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-File Name: jianshu/db.py
-Author: JackeyGao
-mail: junqi.gao@shuyun.com
-Created Time: 三  1/ 6 15:06:18 2016
-'''
 
 from peewee import *
 

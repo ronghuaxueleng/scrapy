@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import json
 import scrapy
 import html2text
@@ -13,7 +14,8 @@ class JianshuHotSpider(CrawlSpider):
     name = "jianshu_hot"
     allowed_domains = ["jianshu.com"]
     start_urls = (
-        'http://www.jianshu.com/',
+        #'http://www.jianshu.com/',
+        'http://www.jianshu.com/collection/591838704681',
     )
 
     def parse(self, response):
