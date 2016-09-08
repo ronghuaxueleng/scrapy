@@ -1,2 +1,3 @@
-# scrapy
-python的抓取程序
+# python的抓取程序
+jianshuHot是用Scrapy框架做的简书热门的抓取
+cnblogs是博客园的抓取
