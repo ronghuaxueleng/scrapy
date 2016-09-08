@@ -43,4 +43,4 @@ YOUR_SEND_MAIL_SECRET='xxx'
 MOBI_BOOK_PATH=$path'/output/books/jianshu_hot-latest.mobi'
 
 ## 定义sendemail命令地址
-$path/sendEmail/sendEmail.pl -s smtp.163.com -t $YOURKINDLE_MAIL_ADDRESS -u "简书热门$(date "+%Y%m%d")" -m "简书热门$(date "+%Y%m%d")" -xu $YOUR_SEND_MAIL_USERNAME -xp $YOUR_SEND_MAIL_SECRET -f $YOUR_SEND_MAIL_USERNAME -a $MOBI_BOOK_PATH
+$path/sendEmail/sendEmail.exe -s smtp.126.com -t $YOURKINDLE_MAIL_ADDRESS -u "简书热门$(date "+%Y%m%d")" -m "简书热门$(date "+%Y%m%d")" -xu $YOUR_SEND_MAIL_USERNAME -xp $YOUR_SEND_MAIL_SECRET -f $YOUR_SEND_MAIL_USERNAME -a $MOBI_BOOK_PATH
