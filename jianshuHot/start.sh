@@ -37,9 +37,9 @@ echo "完成"
 
 
 ## 自定义邮箱服务器
-YOURKINDLE_MAIL_ADDRESS="caoqianghappy_54@kindle.cn"
-YOUR_SEND_MAIL_USERNAME="caoqianghappy@126.com"
-YOUR_SEND_MAIL_SECRET='xinyan1203'
+YOURKINDLE_MAIL_ADDRESS="xx@kindle.cn"
+YOUR_SEND_MAIL_USERNAME="xx@126.com"
+YOUR_SEND_MAIL_SECRET='xx'
 MOBI_BOOK_PATH=$path'/output/books/jianshu_hot-latest.mobi'
 
 ## 定义sendemail命令地址
