@@ -14,9 +14,11 @@ class JianshuHotSpider(CrawlSpider):
     name = "jianshu_hot"
     allowed_domains = ["jianshu.com"]
     start_urls = (
-        #'http://www.jianshu.com/',
-        'http://www.jianshu.com/collection/591838704681',
+        'http://www.jianshu.com/',
     )
+
+    def start_requests(self):
+        return [scrapy.Request("http://www.jianshu.com/users/70135ef4ca28/latest_articles?page={0}".format(x)) for x in range(1, 20)]
 
     def parse(self, response):
         for item in response.css('.article-list li'):
