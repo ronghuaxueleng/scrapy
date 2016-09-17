@@ -10,12 +10,13 @@ sys.setdefaultencoding('utf-8')
 
 def export_to_markdown(item):
     #? * / \ < > : " |
-    markdown_name = item.title.replace('?','？')
-    markdown_name.replace('"','\'').replace('|','')
-    markdown_name.replace('|','').replace('*','')
-    markdown_name.replace('/','').replace('\\','')
-    markdown_name.replace('<','').replace('>','')
-    markdown_name.replace(':','：')#item.slug
+    #markdown_name = item.title.replace('?','？')
+    #markdown_name.replace('"','\'').replace('|','')
+    #markdown_name.replace('|','').replace('*','')
+    #markdown_name.replace('/','').replace('\\','')
+    #markdown_name.replace('<','').replace('>','')
+    #markdown_name.replace(':','：')
+    markdown_name = item.slug
     with open('output/markdown/%s.md' % markdown_name, 'w') as f:
         page_header = '# **%s**\n' % item.title
         page_header += '> %s view\n' % item.views_count
