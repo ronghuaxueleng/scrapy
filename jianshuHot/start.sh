@@ -40,4 +40,14 @@ YOUR_SEND_MAIL_SECRET='xx'
 MOBI_BOOK_PATH=$path'/output/books/jianshu_hot-latest.mobi'
 
 ## 定义sendemail命令地址
-#$path/sendEmail/sendEmail.exe -s smtp.126.com -t $YOURKINDLE_MAIL_ADDRESS -u "简书热门$(date "+%Y%m%d")" -m "简书热门$(date "+%Y%m%d")" -xu $YOUR_SEND_MAIL_USERNAME -xp $YOUR_SEND_MAIL_SECRET -f $YOUR_SEND_MAIL_USERNAME -a $MOBI_BOOK_PATH
+## -f 表示发送者的邮箱
+## -t 表示接收者的邮箱
+## -s 表示SMTP服务器的域名或者ip
+## -u 表示邮件的主题
+## -xu 表示SMTP验证的用户名
+## -xp 表示SMTP验证的密码(注意,这个密码貌似有限制,例如我用d!5neyland就不能被正确识别)
+## -m 表示邮件的内容
+## -cc 表示抄送
+## -bcc 表示暗抄送
+## -a 表示邮件附件
+#$path/sendEmail/sendEmail.exe -s smtp.126.com -t $YOURKINDLE_MAIL_ADDRESS -u "简书热门$(date "+%Y%m%d")" -m "简书热门$(date "+%Y%m%d")" -xu $YOUR_SEND_MAIL_USERNAME -xp $YOUR_SEND_MAIL_SECRET -f $YOUR_SEND_MAIL_USERNAME -a $MOBI_BOOK_PATH -o message-charset=GB2312 -o message-header=GB2312
