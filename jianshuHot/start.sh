@@ -1,7 +1,4 @@
 #! /bin/bash
-#cd $(dirname $0)
-#source /etc/profile
-#source ~/.virtualenvs/spider/bin/activate
 
 path=`pwd`
 
