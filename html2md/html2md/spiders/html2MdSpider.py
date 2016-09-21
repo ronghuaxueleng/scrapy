@@ -9,6 +9,8 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.linkextractors.sgml import BaseSgmlLinkExtractor
 from html2md.items import Html2MdItem
 from html2md.items import Html2MdImageItem
+from html2md.settings import ALLOWED_DOMAINS
+from html2md.settings import START_URLS
 import re
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
@@ -16,10 +18,8 @@ sys.setdefaultencoding( "utf-8" )
 
 class Html2MdSpider(CrawlSpider):
     name = "html2md"
-    allowed_domains = ["ruanyifeng.com"]
-    start_urls = (
-        'http://www.ruanyifeng.com/blog/javascript/',
-    )
+    allowed_domains = ALLOWED_DOMAINS
+    start_urls = START_URLS
 
     def parse(self, response):
         for item in response.css('#alpha #alpha-inner .module-categories .module-content .module-list li'):

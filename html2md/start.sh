@@ -1,22 +1,22 @@
 #! /bin/bash
 
-echo "É¾³ı¾ÉÊı¾İ - note"
+echo "åˆ é™¤æ—§æ•°æ® - note"
 python -c "from html2md.db import delete_note; delete_note()"
 
-echo "É¾³ı¾ÉÊı¾İ - notef"
+echo "åˆ é™¤æ—§æ•°æ® - notef"
 find ./output/markdown -type f -delete
 
-echo "É¾³ı¾ÉÊı¾İ - image"
+echo "åˆ é™¤æ—§æ•°æ® - image"
 python -c "from html2md.db import delete_image; delete_image()"
 
-echo "É¾³ı¾ÉÊı¾İ - imagef"
+echo "åˆ é™¤æ—§æ•°æ® - imagef"
 find ./output/images -type f -delete
 
-echo "ÖØĞÂ×¥È¡ÖĞ - note"
-scrapy crawl html2md --nolog
+echo "é‡æ–°æŠ“å–ä¸­ - note"
+scrapy crawl html2md
 
-echo "ÖØĞÂ×¥È¡ÖĞ - image"
+echo "é‡æ–°æŠ“å–ä¸­ - image"
 python -c "from html2md.image import request_images; request_images()"
 
-echo "Éú³Émarkdown"
+echo "ç”Ÿæˆmarkdown"
 python -c "from html2md.book import gen_markdown; gen_markdown()"

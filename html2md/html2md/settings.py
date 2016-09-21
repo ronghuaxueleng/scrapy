@@ -19,3 +19,10 @@ ITEM_PIPELINES = {
     'html2md.pipelines.Html2MdPipeline': 300,
 }
 
+PAGE_HEADER = {
+    'tag': 'javascript',
+    'category': 'javascript'
+}
+
+ALLOWED_DOMAINS = ["ruanyifeng.com"]
+START_URLS = ['http://www.ruanyifeng.com/blog/javascript/']

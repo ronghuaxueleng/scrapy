@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import datetime
+import time, datetime
 import commands
+from html2md.settings import PAGE_HEADER
 from html2md.db import Note
 
 reload(sys)
@@ -19,10 +20,14 @@ def export_to_markdown(item):
     markdown_name.replace('<','').replace('>','')
     markdown_name.replace(':','：')
     with open('output/markdown/%s.md' % markdown_name, 'w') as f:
+        creat_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+
         page_header = '---\n'
         page_header += 'title: %s\n' % item.title
-        page_header += 'date: %s\n' % datetime.datetime.now()
-        page_header += 'modifiedOn: %s\n' % datetime.datetime.now()
+        page_header += 'tag: %s\n' % PAGE_HEADER['tag']
+        page_header += 'category: %s\n' % PAGE_HEADER['category']
+        page_header += 'date: %s\n' % creat_date
+        page_header += 'modifiedOn: %s\n' % creat_date
         page_header += '---\n'
 
         f.write(page_header + content)
