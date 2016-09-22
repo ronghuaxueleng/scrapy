@@ -4,8 +4,9 @@ import re, sys, os, time
 import httplib2
 from html2md.db import Urls
 from scrapy.selector import Selector
-from html2md.settings import START_URLS
+from html2md.settings import START_URL
 from html2md.settings import DEFAULT_REQUEST_HEADERS
+from html2md.settings import IS_MULTI_PAGE
 
 
 reload(sys)
@@ -19,8 +20,18 @@ def get_start_urls():
 
 
 def get_urls():
+    if IS_MULTI_PAGE == 'true':
+        extract_urls_to_save()
+    else:
+        row = {
+            'title': '',
+            'url': START_URL
+        }
+        save_url(row)
+
+def extract_urls_to_save():
     http = httplib2.Http()  
-    response,content = http.request(url,'GET',headers = DEFAULT_REQUEST_HEADERS)
+    response,content = http.request(START_URL,'GET',headers = DEFAULT_REQUEST_HEADERS)
     for item in Selector(text=content).css('#alpha #alpha-inner .module-categories .module-content .module-list li'):
         # 文章链接
         full_url = item.css('a::attr(href)').extract()[0]

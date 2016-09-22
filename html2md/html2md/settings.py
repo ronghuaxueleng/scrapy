@@ -34,4 +34,4 @@ IS_MULTI_PAGE = 'true'
 
 CONTENT_TYPE = 'ryf'
 
-START_URLS = 'http://www.ruanyifeng.com/blog/javascript/'
+START_URL = 'http://www.ruanyifeng.com/blog/javascript/'
