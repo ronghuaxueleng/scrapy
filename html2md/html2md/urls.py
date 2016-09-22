@@ -18,10 +18,7 @@ def get_start_urls():
     return start_urls
 
 
-def get_url():
-    get_content(START_URLS)
-
-def get_content(url):
+def get_urls():
     http = httplib2.Http()  
     response,content = http.request(url,'GET',headers = DEFAULT_REQUEST_HEADERS)
     for item in Selector(text=content).css('#alpha #alpha-inner .module-categories .module-content .module-list li'):
@@ -49,6 +46,4 @@ def save_url(item):
         pass
 
 if __name__ == '__main__':
-    headers={}      
-    url='http://www.ruanyifeng.com/blog/javascript/'
-    get_content(url, headers)
+    get_urls()
