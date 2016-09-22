@@ -1,5 +1,7 @@
 #! /bin/bash
 
+#python -c "from html2md.urls import get_url; get_url()"
+
 echo "删除旧数据 - note"
 python -c "from html2md.db import delete_note; delete_note()"
 

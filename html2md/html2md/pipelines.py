@@ -34,8 +34,8 @@ class Html2MdPipeline(object):
                 content = content,
                 ).execute()
 
-        except IntegrityError as e:
-            logger.warn('%s SKIP E: (%s)' % (dict(item), str(e)))
+        except:
+            pass
 
         return item
 

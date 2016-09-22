@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from peewee import *
 
 db = SqliteDatabase('note.db')
@@ -19,6 +20,14 @@ class Image(Model):
     class Meta:
         database = db
 
+class Urls(Model):
+    title = CharField(null=True)
+    url = CharField(unique=True)
+    state = IntegerField(null=True)
+    timestamp = DateTimeField(null=True,default=datetime.datetime.now)
+
+    class Meta:
+        database = db
 
 def delete_note():
     return Note.delete().execute()
@@ -28,8 +37,8 @@ def delete_image():
 
 def init_table():
     db.connect()
-    db.create_tables([Note, Image])
+    db.create_tables([Note, Image, Urls])
 
 if __name__ == '__main__':
     db.connect()
-    db.create_tables([Note, Image])
+    db.create_tables([Note, Image, Urls])
