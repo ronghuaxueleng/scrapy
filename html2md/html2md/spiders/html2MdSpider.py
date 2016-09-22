@@ -3,7 +3,6 @@
 import sys, re
 import json
 import scrapy
-import html2text
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.linkextractors.sgml import BaseSgmlLinkExtractor
@@ -25,14 +24,10 @@ class Html2MdSpider(CrawlSpider):
         c = get_rule(response, CONTENT_TYPE)
 
         # 生成markdown 内容
-        h = html2text.HTML2Text()
-        h.ignore_links = False
-        h.inline_links = False
-        content = h.handle(c['body'])
 
         item = Html2MdItem()
         item["title"] = c['title']
-        item["content"] = content.replace('-\n', '-').replace('\n?', '?')
+        item["content"] = c['body']
         item["url"] = response.url
         item["images"] = c['images']
 

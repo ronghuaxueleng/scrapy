@@ -46,6 +46,7 @@ def githup_issues_rule(response):
     body = response.xpath('//*[@class="comment-body markdown-body markdown-format js-comment-body"]').extract()
     body = '\n'.join(body)
     images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+
     return {
         'title': title,
         'body': body,

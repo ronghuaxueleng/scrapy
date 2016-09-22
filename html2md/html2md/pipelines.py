@@ -7,6 +7,7 @@
 
 import sys
 import traceback
+import html2text
 from html2md.image import get_image_name
 from html2md.db import Note
 from html2md.db import Image
@@ -22,24 +23,36 @@ class Html2MdPipeline(object):
             print(u"抓取完毕: %s" % item["title"])
             content = item["content"]
             for img in item["images"]:
-                path = get_image_name(img)
-                Image.insert(
+                try:
+                    path = Image.get(Image.url == img).path
+                except:
+                    path = get_image_name(img)
+                    Image.insert(
                         url=img,
                         path=path
                         ).execute()
+
                 content = content.replace(img, '../images/%s' % path)
-        except Exception:
-            e = traceback.format_exc()
-        
-        try:
-            Note.insert(
-                title = item["title"],
-                url = item["url"],
-                content = content,
-                ).execute()
+                
         except Exception:
             e = traceback.format_exc()
             print e
+            pass
+        
+        try:
+            h = html2text.HTML2Text()
+            h.ignore_links = False
+            h.inline_links = False
+            content = h.handle(content)
+            Note.insert(
+                title = item["title"],
+                url = item["url"],
+                content = content.replace('-\n', '-').replace('\n?', '?'),
+                ).execute()
+        except Exception:
+            e = traceback.format_exc()
+            #print e
+            pass
         Urls.update(state=1).where(Urls.url == item["url"]).execute()
 
         return item

@@ -16,7 +16,8 @@ sys.setdefaultencoding('utf-8')
 
 def get_start_urls():
     start_urls = []
-    for url in Urls.select().where(Urls.state != 1).execute():
+    #for url in Urls.select().where(Urls.state != 1).execute():
+    for url in Urls.select().execute():
       start_urls.append(url.url)
     return start_urls
 
