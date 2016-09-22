@@ -16,6 +16,8 @@ DEFAULT_REQUEST_HEADERS = {
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:48.0) Gecko/20100101 Firefox/48.0'
 
+USE_PROXIES = 'false'
+
 PROXIES = {
         'http': 'http://127.0.0.1:1203',
         'https': 'http://127.0.0.1:1203'
@@ -30,8 +32,8 @@ PAGE_HEADER = {
     'category': 'javascript'
 }
 
-IS_MULTI_PAGE = 'true'
+IS_MULTI_PAGE = 'false'
 
-CONTENT_TYPE = 'ryf'
+CONTENT_TYPE = 'githupissues'# wordpress|githupissues|ryf
 
-START_URL = 'http://www.ruanyifeng.com/blog/javascript/'
+START_URL = 'https://github.com/gafish/gafish.github.com/issues/4' #'http://www.ruanyifeng.com/blog/javascript/'

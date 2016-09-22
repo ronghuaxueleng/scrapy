@@ -6,6 +6,16 @@ from scrapy.selector import Selector
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+def get_urls_rule(type):
+    default_a_rule = 'a::attr(href)'
+    rule = {
+        'a': default_a_rule,
+        'body': ''
+    }
+    if type == 'ryf':
+        rule['body'] = '#alpha #alpha-inner .module-categories .module-content .module-list li'
+    return rule
+
 
 def get_rule(response, type):
     if  type == 'wordpress':

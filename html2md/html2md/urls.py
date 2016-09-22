@@ -7,6 +7,8 @@ from scrapy.selector import Selector
 from html2md.settings import START_URL
 from html2md.settings import DEFAULT_REQUEST_HEADERS
 from html2md.settings import IS_MULTI_PAGE
+from html2md.rules import get_urls_rule
+from html2md.settings import CONTENT_TYPE
 
 
 reload(sys)
@@ -31,13 +33,11 @@ def get_urls():
 
 def extract_urls_to_save():
     http = httplib2.Http()  
-    response,content = http.request(START_URL,'GET',headers = DEFAULT_REQUEST_HEADERS)
-    for item in Selector(text=content).css('#alpha #alpha-inner .module-categories .module-content .module-list li'):
+    response,content = http.request(START_URL,'GET', headers = DEFAULT_REQUEST_HEADERS)
+    urls_rule = get_urls_rule(CONTENT_TYPE)
+    for item in Selector(text=content).css(urls_rule['body']):
         # 文章链接
-        full_url = item.css('a::attr(href)').extract()[0]
-        # 文章完整的url
-        #full_url = response.urljoin(full_url)
-        # 抓文章详情页
+        full_url = item.css(urls_rule['a']).extract()[0]
         row = {
             'title': '',
             'url': full_url
@@ -50,7 +50,7 @@ def save_url(item):
             title = item["title"],
             url = item["url"],
             state = 0,
-            timestamp = time.strftime('%Y-%m-%d  %H:%M:%S',time.localtime(time.time()))
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
             ).execute()
 
     except:

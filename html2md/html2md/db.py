@@ -8,13 +8,13 @@ db = SqliteDatabase('note.db')
 class Note(Model):
     title = CharField()
     url = CharField()
-    content = TextField()
+    content = TextField(unique=True)
 
     class Meta:
         database = db # This model uses the "people.db" database.
 
 class Image(Model):
-    url = CharField()
+    url = CharField(unique=True)
     path = CharField()
 
     class Meta:

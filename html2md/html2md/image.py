@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re, sys, os
-from html2md.settings import PROXIES
-from html2md.db import Image
+import time
+from settings import PROXIES
+from settings import USE_PROXIES
+from db import Image
 import urllib
 
 reload(sys)
@@ -13,14 +15,18 @@ images = Image.select().execute()
 def get_image_name(url):
     path = os.path.basename(url)
     group = re.findall('\S+\.[jpg|png|gif|jpeg|bmp]+', path)
-    return group[0]
+    if len(group)>0:
+        return group[0]
+    else:
+        return '%s.jpg' % (time.strftime('%Y%m%d%H%M%S',time.localtime(time.time()))+str(time.time()))
 
-def request_image(url):
-    image_name = get_image_name(url)
+
+def request_image(url, image_name):
     print(u"正在下载 %s" % image_name)
     try:
         path = 'output/images/%s' % image_name
-        #urllib.urlopen(url, proxies=PROXIES)
+        if USE_PROXIES == 'true':
+            urllib.urlopen(url, proxies=PROXIES)
         data = urllib.urlretrieve(url,path)
         print(u"%s 下载成功" % image_name)
         return True
@@ -30,7 +36,8 @@ def request_image(url):
         return False
 
 def request_images():
-    return map(request_image, [ i.url for i in images ])
+    for img in images:
+        request_image(img.url, img.path)
 
 if __name__ == '__main__':
     request_images()
