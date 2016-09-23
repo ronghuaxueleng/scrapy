@@ -1,7 +1,5 @@
 #! /bin/bash
 
-#python -c "from html2md.urls import get_urls; get_urls()"
-
 echo "删除旧数据 - note"
 python -c "from html2md.db import delete_note; delete_note()"
 
@@ -13,6 +11,9 @@ python -c "from html2md.db import delete_image; delete_image()"
 
 echo "删除旧数据 - imagef"
 find ./output/images -type f -delete
+
+echo "生成抓取链接"
+python -c "from html2md.urls import get_urls; get_urls()"
 
 echo "重新抓取中 - note"
 scrapy crawl html2md
