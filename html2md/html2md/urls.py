@@ -35,19 +35,21 @@ def get_urls():
                 tag = d['tag']
                 category = d['category']
                 content_type = d['content_type']
-                
-                for url in urls:
-                    if multi_page == True:
-                        extract_urls_to_save(url, content_type, tag, category)
-                    else:
-                        row = {
-                            'title': '',
-                            'url': url,
-                            'tag': tag,
-                            'category': category,
-                            'content_type': content_type
-                        }
-                        save_url(row)
+                scrapy = d['scrapy']
+
+                if scrapy == True:
+                    for url in urls:
+                        if multi_page == True:
+                            extract_urls_to_save(url, content_type, tag, category)
+                        else:
+                            row = {
+                                'title': '',
+                                'url': url,
+                                'tag': tag,
+                                'category': category,
+                                'content_type': content_type
+                            }
+                            save_url(row)
     except Exception:
         e = traceback.format_exc()
         print e
