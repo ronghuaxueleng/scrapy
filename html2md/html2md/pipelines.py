@@ -6,7 +6,9 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import sys
+import time
 import traceback
+import hashlib
 import html2text
 from html2md.image import get_image_name
 from html2md.db import Note
@@ -19,6 +21,7 @@ sys.setdefaultencoding('utf-8')
 class Html2MdPipeline(object):
 
     def process_item(self, item, spider):
+        timestamp=time.strftime('%Y-%m-%d',time.localtime(time.time()))
         try:
             print(u"抓取完毕: %s" % item["title"])
             content = item["content"]
@@ -29,7 +32,9 @@ class Html2MdPipeline(object):
                     path = get_image_name(img)
                     Image.insert(
                         url=img,
-                        path=path
+                        path=path,
+                        state=0,
+                        timestamp=timestamp
                         ).execute()
 
                 content = content.replace(img, '../images/%s' % path)
@@ -47,7 +52,11 @@ class Html2MdPipeline(object):
             Note.insert(
                 title = item["title"],
                 url = item["url"],
+                tag = item["tag"],
+                category = item["category"],
                 content = content.replace('-\n', '-').replace('\n?', '?'),
+                state=0,
+                timestamp=timestamp
                 ).execute()
         except Exception:
             e = traceback.format_exc()

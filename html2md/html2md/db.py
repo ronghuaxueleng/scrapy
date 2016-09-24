@@ -6,9 +6,13 @@ from peewee import *
 db = SqliteDatabase('note.db')
 
 class Note(Model):
-    title = CharField()
+    title = CharField(null=True)
     url = CharField()
+    tag = CharField(null=True)
+    category = CharField(null=True)
     content = TextField(unique=True)
+    state = IntegerField(null=True)
+    timestamp = DateTimeField(null=True,default=datetime.datetime.now)
 
     class Meta:
         database = db # This model uses the "people.db" database.
@@ -16,6 +20,8 @@ class Note(Model):
 class Image(Model):
     url = CharField(unique=True)
     path = CharField()
+    state = IntegerField(null=True)
+    timestamp = DateTimeField(null=True,default=datetime.datetime.now)
 
     class Meta:
         database = db
@@ -23,6 +29,9 @@ class Image(Model):
 class Urls(Model):
     title = CharField(null=True)
     url = CharField(unique=True)
+    tag = CharField(null=True)
+    category = CharField(null=True)
+    content_type = CharField(null=True)
     state = IntegerField(null=True)
     timestamp = DateTimeField(null=True,default=datetime.datetime.now)
 

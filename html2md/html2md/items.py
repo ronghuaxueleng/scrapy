@@ -11,6 +11,8 @@ import scrapy
 class Html2MdItem(scrapy.Item):
     title = scrapy.Field()
     url = scrapy.Field()
+    tag = scrapy.Field()
+    category = scrapy.Field()
     content = scrapy.Field()
     images = scrapy.Field()
 

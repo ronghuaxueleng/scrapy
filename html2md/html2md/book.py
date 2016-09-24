@@ -3,7 +3,6 @@
 import sys
 import time, datetime
 import commands
-from html2md.settings import PAGE_HEADER
 from html2md.db import Note
 
 reload(sys)
@@ -24,13 +23,14 @@ def export_to_markdown(item):
 
         page_header = '---\n'
         page_header += 'title: %s\n' % item.title
-        page_header += 'tag: %s\n' % PAGE_HEADER['tag']
-        page_header += 'category: %s\n' % PAGE_HEADER['category']
+        page_header += 'tag: %s\n' % item.tag
+        page_header += 'category: %s\n' % item.category
         page_header += 'date: %s\n' % creat_date
         page_header += 'modifiedOn: %s\n' % creat_date
         page_header += '---\n'
 
         f.write(page_header + content)
+        Note.update(state=1).where(Note.content == content).execute()
 
 
 def write_readme():
@@ -45,7 +45,7 @@ def write_readme():
 def write_summary():
     content = '* [Jianshu Hot](markdown/README.md)\n'
 
-    for i in Note.select().order_by(Note.views_count.desc()).execute():
+    for i in Note.select().execute():
         content += ' - [%s](markdown/%s.md)\n' % (i.title, i.slug)
 
     with open('output/SUMMARY.md', 'w') as f:
@@ -54,6 +54,6 @@ def write_summary():
 def gen_markdown():
     #write_readme()
     #write_summary()
-    for item in Note.select().execute():
+    for item in Note.select().where(Note.state != 1).execute():
         export_to_markdown(item)
 

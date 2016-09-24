@@ -1,0 +1,21 @@
+[
+    {
+        "url": [
+            "https://github.com/gafish/gafish.github.com/issues/4",
+            "https://github.com/gafish/gafish.github.com/issues/5"
+        ],
+        "multi_page": false,
+        "tag": "d3",
+        "category": "d3",
+        "content_type": "githupissues"
+    },
+    {
+        "url": [
+            "http://www.ruanyifeng.com/blog/javascript/"
+        ],
+        "multi_page": true,
+        "tag": "javascript",
+        "category": "javascript",
+        "content_type": "ryf"
+    }
+]
