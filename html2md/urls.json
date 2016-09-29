@@ -8,7 +8,7 @@
         "tag": "d3",
         "category": "d3",
         "content_type": "githupissues",
-        "scrapy": true
+        "scrapy": false
     },
     {
         "url": [
@@ -19,5 +19,25 @@
         "category": "javascript",
         "content_type": "ryf",
         "scrapy": false
+    },
+    {
+        "url": [
+            "http://www.cnblogs.com/programerlrc/articles/5207402.html"
+        ],
+        "multi_page": false,
+        "tag": "angularJs",
+        "category": "angularJs",
+        "content_type": "cnblogs",
+        "scrapy": false
+    },
+    {
+        "url": [
+            "http://www.cnblogs.com/sakurayeah/p/5885769.html"
+        ],
+        "multi_page": false,
+        "tag": "react",
+        "category": "react",
+        "content_type": "cnblogs",
+        "scrapy": true
     }
 ]

@@ -24,12 +24,25 @@ def get_rule(response, type):
         return githup_issues_rule(response)
     elif type == 'ryf':
         return ryf_rule(response)
+    elif type == 'cnblogs':
+        return cnblogs_rule(response)
     else:
         return {
             'title': '',
             'body': '',
             'images': []
         }
+def cnblogs_rule(response):
+    title = response.xpath('//*[@id="cb_post_title_url"]/text()').extract()[0]
+    body = response.xpath('//*[@id="cnblogs_post_body"]').extract()[0]
+    images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+    return {
+        'title': title,
+        'body': body,
+        'images': images
+    }
+
+
 def ryf_rule(response):
     title = response.xpath('//*[@id="page-title"]/text()').extract()[0]
     body = response.xpath('//*[@id="main-content"]').extract()[0]

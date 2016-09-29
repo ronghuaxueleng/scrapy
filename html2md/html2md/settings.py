@@ -16,7 +16,7 @@ DEFAULT_REQUEST_HEADERS = {
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:48.0) Gecko/20100101 Firefox/48.0'
 
-USE_PROXIES = 'true'
+USE_PROXIES = 'false'
 
 PROXIES = {
         'http': 'http://127.0.0.1:1203',
