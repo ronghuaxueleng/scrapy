@@ -12,9 +12,22 @@ def get_urls_rule(type):
         'a': default_a_rule,
         'body': ''
     }
+    
     if type == 'ryf':
-        rule['body'] = '#alpha #alpha-inner .module-categories .module-content .module-list li'
+        return multi_page_rule_for_ryf(type, rule)
+    elif type == 'cnblogs':
+        return multi_page_rule_for_cnblogs(type, rule)
+    else:
+        return rule
+
+def multi_page_rule_for_ryf(type, rule):
+    rule['body'] = '#alpha #alpha-inner .module-categories .module-content .module-list li'
     return rule
+
+def multi_page_rule_for_cnblogs(type, rule):
+    rule['body'] = '#mainContent .forFlow #myposts .PostList'
+    rule['a'] = 'div > a::attr(href)'
+    return rule 
 
 
 def get_rule(response, type):

@@ -38,6 +38,16 @@
         "tag": "react",
         "category": "react",
         "content_type": "cnblogs",
-        "scrapy": true
+        "scrapy": false
+    },
+    {
+        "url": [
+            "http://www.cnblogs.com/GongQi/tag/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"
+        ],
+        "multi_page": true,
+        "tag": "javascript",
+        "category": "javascript",
+        "content_type": "cnblogs",
+        "scrapy": false
     }
 ]
