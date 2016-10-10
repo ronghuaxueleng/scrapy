@@ -49,5 +49,15 @@
         "category": "javascript",
         "content_type": "cnblogs",
         "scrapy": false
+    },
+    {
+        "url": [
+            "https://segmentfault.com/a/1190000003817321"
+        ],
+        "multi_page": false,
+        "tag": "php",
+        "category": "php",
+        "content_type": "segmentfault",
+        "scrapy": false
     }
 ]

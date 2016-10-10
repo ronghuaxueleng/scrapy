@@ -39,12 +39,25 @@ def get_rule(response, type):
         return ryf_rule(response)
     elif type == 'cnblogs':
         return cnblogs_rule(response)
+    elif type == 'segmentfault':
+        return segmentfault_rule(response)
     else:
         return {
             'title': '',
             'body': '',
             'images': []
         }
+
+def segmentfault_rule(response):
+    title = response.css('.post-topheader__info--title a::text').extract()[0]
+    body = response.css('.article__content').extract()[0]
+    images = re.findall(r'<img\s+src=["|\'](.*?)["|\']',body)
+    return {
+        'title': title,
+        'body': body,
+        'images': images
+    }
+
 def cnblogs_rule(response):
     title = response.xpath('//*[@id="cb_post_title_url"]/text()').extract()[0]
     body = response.xpath('//*[@id="cnblogs_post_body"]').extract()[0]
