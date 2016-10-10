@@ -5,6 +5,7 @@ import hashlib
 import httplib2
 import json
 import traceback
+import urllib
 from html2md.db import Urls
 from scrapy.selector import Selector
 from html2md.settings import URLS_DATA_FILE
@@ -36,11 +37,13 @@ def get_urls():
                 category = d['category']
                 content_type = d['content_type']
                 scrapy = d['scrapy']
+                if d.has_key('url_join'):
+                    url_join = d['url_join']
 
                 if scrapy == True:
                     for url in urls:
                         if multi_page == True:
-                            extract_urls_to_save(url, content_type, tag, category)
+                            extract_urls_to_save(url, content_type, tag, category, url_join)
                         else:
                             row = {
                                 'title': '',
@@ -55,13 +58,18 @@ def get_urls():
         print e
         pass
 
-def extract_urls_to_save(url, content_type, tag, category):
+def extract_urls_to_save(url, content_type, tag, category, url_join):
     http = httplib2.Http()  
     response,content = http.request(url,'GET', headers = DEFAULT_REQUEST_HEADERS)
     urls_rule = get_urls_rule(content_type)
     for item in Selector(text=content).css(urls_rule['body']):
         # 文章链接
         full_url = item.css(urls_rule['a']).extract()[0]
+        if url_join == True:
+            proto, rest = urllib.splittype(url)
+            res, rest = urllib.splithost(rest)
+            full_url = proto+'://'+res+full_url
+
         row = {
             'title': '',
             'url': full_url,

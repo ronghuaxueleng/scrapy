@@ -17,8 +17,15 @@ def get_urls_rule(type):
         return multi_page_rule_for_ryf(type, rule)
     elif type == 'cnblogs':
         return multi_page_rule_for_cnblogs(type, rule)
+    elif type =='segmentfault':
+        return multi_page_rule_for_segmentfault(type, rule)
     else:
         return rule
+
+def multi_page_rule_for_segmentfault(type, rule):
+    rule['body'] = '.stream-list .stream-list__item'
+    rule['a'] = '.summary .title > a::attr(href)'
+    return rule
 
 def multi_page_rule_for_ryf(type, rule):
     rule['body'] = '#alpha #alpha-inner .module-categories .module-content .module-list li'

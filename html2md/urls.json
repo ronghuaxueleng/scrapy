@@ -59,5 +59,16 @@
         "category": "php",
         "content_type": "segmentfault",
         "scrapy": false
+    },
+    {
+        "url": [
+            "https://segmentfault.com/blog/feihu"
+        ],
+        "multi_page": true,
+        "tag": "javascript",
+        "category": "javascript",
+        "content_type": "segmentfault",
+        "url_join":true,
+        "scrapy": true
     }
 ]
