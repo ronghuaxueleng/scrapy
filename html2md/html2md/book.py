@@ -35,7 +35,7 @@ def export_to_markdown(item):
 
 def write_readme():
     content = ''
-    content += '简书热门\n'
+    content += '我的书籍\n'
     content += '========\n\n'
     content += '生成时间: %s\n' % datetime.datetime.now()
     with open('output/README.md', 'w') as f:
@@ -43,17 +43,17 @@ def write_readme():
 
 
 def write_summary():
-    content = '* [Jianshu Hot](markdown/README.md)\n'
+    content = '* [我的书籍](markdown/README.md)\n'
 
     for i in Note.select().execute():
-        content += ' - [%s](markdown/%s.md)\n' % (i.title, i.slug)
+        content += ' - [%s](markdown/%s.md)\n' % (i.title, i.title)
 
     with open('output/SUMMARY.md', 'w') as f:
         f.write(content)
 
 def gen_markdown():
-    #write_readme()
-    #write_summary()
+    write_readme()
+    write_summary()
     for item in Note.select().where(Note.state != 1).execute():
         export_to_markdown(item)
 

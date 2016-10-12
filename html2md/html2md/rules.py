@@ -23,8 +23,16 @@ def get_urls_rule(type):
         return rule
 
 def multi_page_rule_for_segmentfault(type, rule):
-    rule['body'] = '.stream-list .stream-list__item'
-    rule['a'] = '.summary .title > a::attr(href)'
+    rule['rules'] = [
+        {
+            'body': '.stream-list .stream-list__item',
+            'a': '.summary .title > a::attr(href)'
+        },
+        {
+            'body': '.profile-mine__content--title-warp',
+            'a': 'a::attr(href)'
+        }
+    ]
     return rule
 
 def multi_page_rule_for_ryf(type, rule):
@@ -57,7 +65,11 @@ def get_rule(response, type):
 
 def segmentfault_rule(response):
     title = response.css('.post-topheader__info--title a::text').extract()[0]
-    body = response.css('.article__content').extract()[0]
+    body = response.css('.article__content').extract()
+    if len(body)>0:
+        body = body[0]
+    else:
+        body = response.css('#noteContent').extract()[0]
     images = re.findall(r'<img\s+src=["|\'](.*?)["|\']',body)
     return {
         'title': title,

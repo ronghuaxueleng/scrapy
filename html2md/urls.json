@@ -69,6 +69,18 @@
         "category": "javascript",
         "content_type": "segmentfault",
         "url_join":true,
+        "scrapy": false
+    },
+    {
+        "url": [
+            "https://segmentfault.com/u/cyseria/notes?page=1",
+            "https://segmentfault.com/u/cyseria/notes?page=2"
+        ],
+        "multi_page": true,
+        "tag": "javascript",
+        "category": "javascript",
+        "content_type": "segmentfault",
+        "url_join":true,
         "scrapy": true
     }
 ]

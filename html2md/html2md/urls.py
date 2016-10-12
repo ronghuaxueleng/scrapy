@@ -58,13 +58,10 @@ def get_urls():
         print e
         pass
 
-def extract_urls_to_save(url, content_type, tag, category, url_join):
-    http = httplib2.Http()  
-    response,content = http.request(url,'GET', headers = DEFAULT_REQUEST_HEADERS)
-    urls_rule = get_urls_rule(content_type)
-    for item in Selector(text=content).css(urls_rule['body']):
+def iteration(url, content, rule, content_type, tag, category, url_join):
+    for item in Selector(text=content).css(rule['body']):
         # 文章链接
-        full_url = item.css(urls_rule['a']).extract()[0]
+        full_url = item.css(rule['a']).extract()[0]
         if url_join == True:
             proto, rest = urllib.splittype(url)
             res, rest = urllib.splithost(rest)
@@ -78,6 +75,16 @@ def extract_urls_to_save(url, content_type, tag, category, url_join):
             'content_type': content_type
         }
         save_url(row)
+
+def extract_urls_to_save(url, content_type, tag, category, url_join):
+    http = httplib2.Http()  
+    response,content = http.request(url,'GET', headers = DEFAULT_REQUEST_HEADERS)
+    urls_rule = get_urls_rule(content_type)
+    if urls_rule.has_key('rules'):
+        for rule in urls_rule['rules']:
+            iteration(url, content, rule, content_type, tag, category, url_join)
+    else:
+        iteration(url, content, urls_rule, content_type, tag, category, url_join)
 
 def save_url(item):
     try:
