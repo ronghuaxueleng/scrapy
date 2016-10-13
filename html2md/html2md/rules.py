@@ -101,7 +101,8 @@ def ryf_rule(response):
 def githup_issues_rule(response):
     title =  response.xpath('//*[@class="js-issue-title"]/text()|//*[@class=" js-issue-title"]/text()').extract()[0]
     title = title.strip()
-    body = response.xpath('//*[@class="comment-body markdown-body markdown-format js-comment-body"]').extract()
+    #body = response.xpath('//*[@class="comment-body markdown-body markdown-format js-comment-body"]').extract()
+    body = response.css('div[id*="issue-"] .edit-comment-hide .comment-body').extract()
     body = '\n'.join(body)
     images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
 
