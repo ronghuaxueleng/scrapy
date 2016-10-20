@@ -32,7 +32,10 @@ def get_urls():
             data = json.load(f)
             for d in data:
                 urls = d['url']
-                multi_page = d['multi_page']
+                if d.has_key('multi_page'):
+                    multi_page = d['multi_page']
+                else:
+                    multi_page = False
                 tag = d['tag']
                 category = d['category']
                 content_type = d['content_type']

@@ -56,12 +56,32 @@ def get_rule(response, type):
         return cnblogs_rule(response)
     elif type == 'segmentfault':
         return segmentfault_rule(response)
+    elif type == 'jianshu':
+        return jianshu_rule(response)
     else:
-        return {
-            'title': '',
-            'body': '',
-            'images': []
-        }
+        return default_rule(response)
+
+def default_rule(response):
+    title = response.css('title::text').extract()[0]
+    title = title.strip()
+    body = response.css('.body').extract()[0]
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
+    return {
+        'title': title,
+        'body': body,
+        'images': images
+    }
+
+def jianshu_rule(response):
+    title = response.xpath('//h1[@class="title"]/text()').extract()[0]
+    body = response.xpath('//div[@class="show-content"]').extract()[0]
+    images = response.xpath('//div[@class="image-package"]/img/@src').extract()
+    return {
+        'title': title,
+        'body': body,
+        'images': images
+    }
+
 
 def segmentfault_rule(response):
     title = response.css('.post-topheader__info--title a::text').extract()[0]
@@ -70,7 +90,7 @@ def segmentfault_rule(response):
         body = body[0]
     else:
         body = response.css('#noteContent').extract()[0]
-    images = re.findall(r'<img\s+src=["|\'](.*?)["|\']',body)
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
     return {
         'title': title,
         'body': body,
@@ -80,7 +100,7 @@ def segmentfault_rule(response):
 def cnblogs_rule(response):
     title = response.xpath('//*[@id="cb_post_title_url"]/text()').extract()[0]
     body = response.xpath('//*[@id="cnblogs_post_body"]').extract()[0]
-    images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
     return {
         'title': title,
         'body': body,
@@ -91,7 +111,7 @@ def cnblogs_rule(response):
 def ryf_rule(response):
     title = response.xpath('//*[@id="page-title"]/text()').extract()[0]
     body = response.xpath('//*[@id="main-content"]').extract()[0]
-    images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
     return {
         'title': title,
         'body': body,
@@ -104,7 +124,7 @@ def githup_issues_rule(response):
     #body = response.xpath('//*[@class="comment-body markdown-body markdown-format js-comment-body"]').extract()
     body = response.css('div[id*="issue-"] .edit-comment-hide .comment-body').extract()
     body = '\n'.join(body)
-    images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
 
     return {
         'title': title,
@@ -129,7 +149,7 @@ def wordpress_rule(response):
     for crayon_code in crayon_codes:
         pre = '<pre><code>'+crayon_code+'</code></pre>>'
         body = body.replace(crayon_code,pre)
-    images = re.findall(r'<img\ssrc=["|\'](.*?)["|\']',body)
+    images = re.findall(r'<img\s{0,}\S{0,}\s{0,}src=["|\'](.*?)["|\']',body)
     return {
         'title': title,
         'body': body,
