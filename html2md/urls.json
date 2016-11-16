@@ -8,7 +8,7 @@
         "tag": "d3",
         "category": "d3",
         "content_type": "githupissues",
-        "scrapy": true
+        "scrapy": false
     },
     {
         "url": [
@@ -115,5 +115,39 @@
         "category": "javascript",
         "content_type": "githupissues",
         "scrapy": false
+    },
+    {
+        "url": [
+            "http://www.admin10000.com/document/9191.html"
+        ],
+        "multi_page": false,
+        "tag": "css",
+        "category": "css",
+        "content_type": "",
+        "url_join":true,
+        "scrapy": false
+    },
+    {
+        "url": [
+            "https://segmentfault.com/a/1190000004205553"
+        ],
+        "multi_page": false,
+        "tag": "php",
+        "category": "php",
+        "content_type": "segmentfault",
+        "url_join":true,
+        "scrapy": false
+    },
+    {
+        "url": [
+            "http://laravelacademy.org/laravel-docs-5_2"
+        ],
+        "multi_page": true,
+        "tag": "php",
+        "category": "php",
+        "content_type": "wordpress",
+        "url_join":false,
+        "scrapy": true
     }
 ]
+

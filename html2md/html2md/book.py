@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys
+import sys, re
 import time, datetime
 import commands
 from html2md.db import Note
@@ -8,29 +8,36 @@ from html2md.db import Note
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+def multiple_replace(text,adict):
+    rx=re.compile('|'.join(map(re.escape,adict)))
+    def one_xlat(match):
+        return adict[match.group(0)]
+    return rx.sub(one_xlat,text)
+
 def export_to_markdown(item):
     #? * / \ < > : " |
     title = item.title
     content = item.content
-    markdown_name = title.replace('?','？')
-    markdown_name.replace('"','\'').replace('|','')
-    markdown_name.replace('|','').replace('*','')
-    markdown_name.replace('/','').replace('\\','')
-    markdown_name.replace('<','').replace('>','')
-    markdown_name.replace(':','：')
-    with open('output/markdown/%s.md' % markdown_name, 'w') as f:
-        creat_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
-        page_header = '---\n'
-        page_header += 'title: %s\n' % item.title
-        page_header += 'tag: %s\n' % item.tag
-        page_header += 'category: %s\n' % item.category
-        page_header += 'date: %s\n' % creat_date
-        page_header += 'modifiedOn: %s\n' % creat_date
-        page_header += '---\n'
+    markdown_name = multiple_replace(title,{'?':'？','"':'\'','|':'','/':'or','\\':'','<':'','>':'',':':'：'})
+    print markdown_name
+    try:
+        with open('output/markdown/%s.md' % markdown_name, 'w') as f:
+            creat_date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 
-        f.write(page_header + content)
-        Note.update(state=1).where(Note.content == content).execute()
+            page_header = '---\n'
+            page_header += 'title: %s\n' % item.title
+            page_header += 'tag: %s\n' % item.tag
+            page_header += 'category: %s\n' % item.category
+            page_header += 'date: %s\n' % creat_date
+            page_header += 'modifiedOn: %s\n' % creat_date
+            page_header += '---\n'
+
+            f.write(page_header + content)
+            Note.update(state=1).where(Note.content == content).execute()
+    except:
+        print '生成%s文件时失败' % markdown_name
+        pass
 
 
 def write_readme():

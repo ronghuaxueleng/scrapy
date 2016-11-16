@@ -19,6 +19,8 @@ def get_urls_rule(type):
         return multi_page_rule_for_cnblogs(type, rule)
     elif type =='segmentfault':
         return multi_page_rule_for_segmentfault(type, rule)
+    elif type =='wordpress':
+        return multi_page_rule_for_wordpress(type, rule)
     else:
         return rule
 
@@ -33,6 +35,10 @@ def multi_page_rule_for_segmentfault(type, rule):
             'a': 'a::attr(href)'
         }
     ]
+    return rule
+
+def multi_page_rule_for_wordpress(type, rule):
+    rule['body'] = 'div.entry-content li'
     return rule
 
 def multi_page_rule_for_ryf(type, rule):
