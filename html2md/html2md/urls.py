@@ -40,6 +40,7 @@ def get_urls():
                 category = d['category']
                 content_type = d['content_type']
                 scrapy = d['scrapy']
+                url_join = False
                 if d.has_key('url_join'):
                     url_join = d['url_join']
 
