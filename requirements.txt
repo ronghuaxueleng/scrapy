@@ -1,0 +1,7 @@
+html2text==2015.11.4
+bs4
+lxml==3.4.4
+peewee==2.7.4
+requests==2.9.1
+Scrapy==1.0.4
+Twisted==16.4.1

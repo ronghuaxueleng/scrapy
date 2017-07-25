@@ -24,7 +24,7 @@ class Html_Downloader(object):
 
 
 if __name__ == '__main__':
-    text = Html_Downloader.download("http://www.cnblogs.com/GongQi/p/4029678.html")
+    text = Html_Downloader.download("http://www.cnblogs.com/sakurayeah/p/5885769.html")
     #print text
     # Html_Parse.parse(text)
     Convert.convert(Html_Parse.parse(text))

@@ -1,5 +1,4 @@
-[
-    {
+[{
         "url": [
             "https://github.com/gafish/gafish.github.com/issues/4",
             "https://github.com/gafish/gafish.github.com/issues/5"
@@ -68,7 +67,7 @@
         "tag": "javascript",
         "category": "javascript",
         "content_type": "segmentfault",
-        "url_join":true,
+        "url_join": true,
         "scrapy": false
     },
     {
@@ -80,7 +79,7 @@
         "tag": "javascript",
         "category": "javascript",
         "content_type": "segmentfault",
-        "url_join":true,
+        "url_join": true,
         "scrapy": false
     },
     {
@@ -92,7 +91,7 @@
         "tag": "php",
         "category": "php",
         "content_type": "segmentfault",
-        "url_join":true,
+        "url_join": true,
         "scrapy": false
     },
     {
@@ -124,7 +123,7 @@
         "tag": "css",
         "category": "css",
         "content_type": "",
-        "url_join":true,
+        "url_join": true,
         "scrapy": false
     },
     {
@@ -135,19 +134,30 @@
         "tag": "php",
         "category": "php",
         "content_type": "segmentfault",
-        "url_join":true,
+        "url_join": true,
         "scrapy": false
     },
     {
         "url": [
             "http://laravelacademy.org/laravel-docs-5_2"
         ],
-        "multi_page": true,
+        "multi_page": false,
         "tag": "php",
         "category": "php",
         "content_type": "wordpress",
-        "url_join":false,
+        "url_join": false,
+        "scrapy": false
+    },
+    {
+        "url": [
+            "http://laravelacademy.org/post/3755.html",
+            "http://laravelacademy.org/post/3761.html"
+        ],
+        "multi_page": false,
+        "tag": "php",
+        "category": "php",
+        "content_type": "wordpress",
+        "url_join": false,
         "scrapy": true
     }
 ]
-

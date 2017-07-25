@@ -14,11 +14,49 @@ class JianshuHotSpider(CrawlSpider):
     name = "jianshu_hot"
     allowed_domains = ["jianshu.com"]
     start_urls = (
-        'http://www.jianshu.com/',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=1',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=2',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=3',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=4',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=5',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=6',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=7',
+        'http://www.jianshu.com/users/05ce968a6ca6/latest_articles?page=8'
     )
 
-    def start_requests(self):
-        return [scrapy.Request("http://www.jianshu.com/users/70135ef4ca28/latest_articles?page={0}".format(x)) for x in range(1, 20)]
+    rules = (
+        Rule(LinkExtractor(
+                    allow=(r'/p/\w+',)
+                ), 
+                callback='parse_item',
+            ), 
+    )
+
+    def parse_item(self, response):
+        title = response.xpath('//h1[@class="title"]/text()').extract()[0]
+        body = response.xpath('//div[@class="show-content"]').extract()[0]
+        attr = response.xpath('//script[@data-name="note"]/text()').extract()
+        images = response.xpath('//div[@class="image-package"]/img/@src').extract()
+        notes = json.loads(attr[0].strip())
+
+        # 生成markdown 内容
+        h = html2text.HTML2Text()
+        h.ignore_links = False
+        h.inline_links = False
+        content = h.handle(body)
+
+        item = JianshuItem()
+        item["title"] = title
+        item["content"] = content.replace('-\n', '-').replace('\n?', '?')
+        item["url"] = notes['url']
+        item["slug"] = notes['slug']
+        item["views_count"] = notes['views_count']
+        item["likes_count"] = notes['likes_count']
+        item["images"] = images
+        yield item
+
+    #def start_requests(self):
+    #    return [scrapy.Request("http://www.jianshu.com/users/70135ef4ca28/latest_articles?page={0}".format(x)) for x in range(1, 20)]
 
     def parse(self, response):
         for item in response.css('.article-list li'):
